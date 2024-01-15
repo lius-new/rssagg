@@ -5,3 +5,17 @@ returning *;
 
 -- name: GetFeeds :many
 SELECT * FROM feeds;
+
+--  NULLS FIRST 表示nulls的排序(nulls排在非nulls前面)
+
+-- name: GetNextFeedsToFetch :many
+SELECT * FROM feeds
+ORDER BY  last_fetched_at ASC NULLS FIRST
+LIMIT $1;
+
+-- name: MarkFeedAsFetchd :one
+UPDATE feeds
+SET last_fetched_at = NOW(),
+updated_at = NOW()
+WHERE id = $1
+RETURNING *;

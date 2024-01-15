@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
@@ -49,6 +50,8 @@ func init() {
 	apiCfg = apiConfig{
 		DB: queries,
 	}
+
+	go startScraping(queries, 10, time.Minute)
 }
 
 func main() {
