@@ -72,6 +72,8 @@ func start() {
 	v1Rotuer.Post("/feeds", apiCfg.middlewareAuth(apiCfg.handlerCreateFeed))
 	v1Rotuer.Get("/feeds", apiCfg.handlerGetFeeds)
 
+	v1Rotuer.Get("/posts", apiCfg.middlewareAuth(apiCfg.handlerGetPostsForUser))
+
 	v1Rotuer.Post("/feed_follows", apiCfg.middlewareAuth(apiCfg.handlerCreateFeedFollow))
 	v1Rotuer.Get("/feed_follows", apiCfg.middlewareAuth(apiCfg.handlerGetFeedFollows))
 	v1Rotuer.Delete(
